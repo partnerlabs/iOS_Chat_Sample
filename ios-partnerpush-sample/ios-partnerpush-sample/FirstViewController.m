@@ -12,8 +12,8 @@
 
 
 
-#define APP_ID @"788b7892fa7bb38dca1db1e56ab5a591"
-#define API_KEY @"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJweCI6IjEwIiwicGYiOiIxIiwiZHQiOjE0MzUwMjY2MzA5MDZ9.kaxKMDoNgczQ1gT7sCsRsDsQg1iCt91Okf1Dn620Bc4"
+#define APP_ID @"baa9753a5940b2c5dd8b3a58c52ed2d4"
+#define API_KEY @"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJweCI6IjEzIiwicGYiOiIxIiwiZHQiOjE0MzU3MzE1MzkwNTF9.0WFMkMNjlkv5cLjvGGC97DdHZQk_z6GOn9yBVe-QYWA"
 #define TEST_TOPIC @"PPChat"
 
 
