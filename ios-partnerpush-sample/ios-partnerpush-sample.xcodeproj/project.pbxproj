@@ -15,8 +15,8 @@
 		19B0FB5AD2D8F281519E8910 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0FAC70ACBB918E6991F7A /* FirstViewController.m */; };
 		19B0FBB8A6E184C318CF224E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B0F2D9658DFBC0BBCEE591 /* Images.xcassets */; };
 		19B0FEBB4FA6548E72085A0E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19B0F547569BD87576C14A00 /* LaunchScreen.xib */; };
-		3CED2CE41B42372B0027FA9A /* PartnerPushFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CED2CE31B42372B0027FA9A /* PartnerPushFramework.framework */; };
-		3CED2CE51B42372B0027FA9A /* PartnerPushFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3CED2CE31B42372B0027FA9A /* PartnerPushFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3C54B1B31B749D440057DC81 /* PartnerPushFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C54B1B21B749D440057DC81 /* PartnerPushFramework.framework */; };
+		3C54B1B41B749D440057DC81 /* PartnerPushFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3C54B1B21B749D440057DC81 /* PartnerPushFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,13 +30,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3CED2CE61B42372B0027FA9A /* Embed Frameworks */ = {
+		3C54B1B11B74543B0057DC81 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3CED2CE51B42372B0027FA9A /* PartnerPushFramework.framework in Embed Frameworks */,
+				3C54B1B41B749D440057DC81 /* PartnerPushFramework.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -59,7 +59,7 @@
 		19B0FAC70ACBB918E6991F7A /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		19B0FDE10E32D0CCEF710193 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		19B0FF94D67D8A549EF2A406 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		3CED2CE31B42372B0027FA9A /* PartnerPushFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PartnerPushFramework.framework; sourceTree = "<group>"; };
+		3C54B1B21B749D440057DC81 /* PartnerPushFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PartnerPushFramework.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CED2CE41B42372B0027FA9A /* PartnerPushFramework.framework in Frameworks */,
+				3C54B1B31B749D440057DC81 /* PartnerPushFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,7 +93,7 @@
 		19B0F4A7F0734C5CB7855AA9 = {
 			isa = PBXGroup;
 			children = (
-				3CED2CE31B42372B0027FA9A /* PartnerPushFramework.framework */,
+				3C54B1B21B749D440057DC81 /* PartnerPushFramework.framework */,
 				19B0FB9DA6935CC6087CCCD1 /* Products */,
 				19B0FC8B8820BF6303F2D67F /* ios-partnerpush-sample */,
 				19B0F1310377EDE5879E7C8B /* ios-partnerpush-sampleTests */,
@@ -153,7 +153,7 @@
 				19B0F30DA188D1633F071987 /* Sources */,
 				19B0FF53403156E4A723DAB3 /* Frameworks */,
 				19B0FA1BBEAC1EF37D5DB389 /* Resources */,
-				3CED2CE61B42372B0027FA9A /* Embed Frameworks */,
+				3C54B1B11B74543B0057DC81 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -328,6 +328,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -335,14 +336,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hyun Gyu Ma (G9VJ3NELY4)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "ios-partnerpush-sample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -365,14 +368,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hyun Gyu Ma (G9VJ3NELY4)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "ios-partnerpush-sample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -416,6 +421,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};

@@ -21,6 +21,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
+    
+    
     return YES;
 }
 
@@ -46,6 +53,59 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+
+//토큰 저장.
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    if (!deviceToken.length) return;
+    
+    NSString *strDeviceToken = [[[[deviceToken description] stringByReplacingOccurrencesOfString:@"<" withString:@""] stringByReplacingOccurrencesOfString:@">" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSLog(@"%@", strDeviceToken);
+    
+    [[NSUserDefaults standardUserDefaults] setValue:strDeviceToken forKey:@"token"];
+    
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+#if !TARGET_IPHONE_SIMULATOR
+    
+    NSLog(@"Error in registration. Error: %@", error);
+    
+#endif
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+#if !TARGET_IPHONE_SIMULATOR
+    
+    NSLog(@"Remote Notification: %@", [userInfo description]);
+    NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
+    
+    if (application.applicationState == UIApplicationStateActive) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Did receive a Remote Notification", nil)
+                                                            message:[apsInfo objectForKey:@"alert"]
+                                                           delegate:self
+                                                  cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    } else {
+        NSString *alert = [apsInfo objectForKey:@"alert"];
+        NSLog(@"Received Push Alert: %@", alert);
+        
+        NSString *badge = [apsInfo objectForKey:@"badge"];
+        NSLog(@"Received Push Badge: %@", badge);
+        
+        NSString *sound = [apsInfo objectForKey:@"sound"];
+        NSLog(@"Received Push Sound: %@", sound);
+        NSLog(@"userinfo: %@", userInfo);
+    }
+    application.applicationIconBadgeNumber = [[apsInfo objectForKey:@"badge"] integerValue];
+    
+#endif
 }
 
 

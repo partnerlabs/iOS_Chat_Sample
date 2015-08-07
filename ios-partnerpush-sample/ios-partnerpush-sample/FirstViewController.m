@@ -14,7 +14,7 @@
 
 #define APP_ID @"baa9753a5940b2c5dd8b3a58c52ed2d4"
 #define API_KEY @"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJweCI6IjEzIiwicGYiOiIxIiwiZHQiOjE0MzU3MzE1MzkwNTF9.0WFMkMNjlkv5cLjvGGC97DdHZQk_z6GOn9yBVe-QYWA"
-#define TEST_TOPIC @"PPChat"
+#define TEST_TOPIC @"GOOD"
 
 
 @interface FirstViewController () {
@@ -34,6 +34,14 @@
 
     _chatTableView.delegate = self;
     _chatTableView.dataSource = self;
+    
+    if (sizeof(void*) == 4) {
+        // Executing in a 32-bit environment
+        NSLog(@"32bit");
+    } else if (sizeof(void*) == 8) {
+        // Executing in a 64-bit environment
+        NSLog(@"64bit");
+    }
 
 
 
@@ -86,26 +94,31 @@
 - (void)partnerPushReceivedWithPayload:(PPMessage *)message {
 
     NSLog(@"%@", message);
+    
+    NSLog(@"%lf",message.msgKey);
+    
 
     @try {
         
         NSString *strMessage = [message.content objectForKey:@"text"];
 
-        [chatData addObject:strMessage];
+//        [chatData addObject:strMessage];
+
+        [chatData insertObject:strMessage atIndex:0];
 
 
 
     } @catch(NSException *e) {
 
-        UILocalNotification *noti = [[UILocalNotification alloc]init];
-        noti.fireDate = [NSDate dateWithTimeIntervalSinceNow:5];
-        noti.timeZone = [NSTimeZone systemTimeZone];
-        noti.alertBody = @"모르는 알림이 도착했어요!";
-        noti.alertAction = @"GOGO";
-        noti.applicationIconBadgeNumber = 1;
-        noti.soundName = UILocalNotificationDefaultSoundName;
-        noti.userInfo = [NSDictionary dictionaryWithObject:@"My User Info" forKey:@"User Info"];
-        [[UIApplication sharedApplication] scheduleLocalNotification:noti];
+//        UILocalNotification *noti = [[UILocalNotification alloc]init];
+//        noti.fireDate = [NSDate dateWithTimeIntervalSinceNow:5];
+//        noti.timeZone = [NSTimeZone systemTimeZone];
+//        noti.alertBody = @"모르는 알림이 도착했어요!";
+//        noti.alertAction = @"GOGO";
+//        noti.applicationIconBadgeNumber = 1;
+//        noti.soundName = UILocalNotificationDefaultSoundName;
+//        noti.userInfo = [NSDictionary dictionaryWithObject:@"My User Info" forKey:@"User Info"];
+//        [[UIApplication sharedApplication] scheduleLocalNotification:noti];
 
     }
 
@@ -113,16 +126,24 @@
         [_chatTableView reloadData];
 
         if([chatData count] != 0) {
-            [self.chatTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[chatData count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+//            [self.chatTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[chatData count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }
     });
 
 }
 
 - (void)partnerPushConnectedWithCode:(PPConnectionReturnCode)code {
+    
+    [[PartnerPushConnector sharedService] partnerPushSendMessageWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"token"] Topic:@"$CMD/sendToken"];
 
+    NSLog(@"connected!");
+    NSLog(@"%@", (PPConnectionReturnCode)code);
 
+}
 
+- (void)partnerPushFailWithCode:(PPConnectionReturnCode)code {
+    NSLog(@"connect fail!");
+    NSLog(@"%@", code);
 }
 
 - (IBAction)addTestTopic:(id)sender {
